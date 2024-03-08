@@ -1,0 +1,15 @@
+[data-testid = metic-container]{
+    box-shadow: 0 0 4 #ede5ce;
+    padding: 10px;
+    color: white;
+}
+
+.plot-container>div{
+    box-shadow: 0 0 5 #8a6606;
+    padding: 3px;
+    border-width: 3;
+}
+div[data-testid = "stExpander"]div[role="Button"]p{
+    font-size: 1.3rem;
+    color: #ede5ce
+}

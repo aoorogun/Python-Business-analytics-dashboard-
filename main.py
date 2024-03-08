@@ -11,6 +11,12 @@ st.set_page_config(page_title="Home", page_icon="", layout="wide")
 
 df = pd.read_csv('/Users/adebolaorogun/Documents/GitHub/BA py/Python-Business-analytics-dashboard-/data.csv')
 
+st.markdown(""" <h3 style ="color: #0022b50"> Superstore Analytics Page  </h3>  """, unsafe_allow_html=True)
+
+with open('style.css') as f:
+    st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
+
+#sidebar
 #st.dataframe(df,use_container_width=True)
 #st.sidebar.image("")
 with st.sidebar:
@@ -77,3 +83,26 @@ with b2:
     )
    st.altair_chart(bar_chart, use_container_width=True)
 
+c1, c2 = st.columns(2)
+with c1:
+    st.subheader("Product & UnitPrice")
+    feature_x = st.selectbox("Select X qualitative data", df2.select_dtypes("object").columns)
+    feature_y = st.selectbox("Select Y qualitative data", df2.select_dtypes("number").columns)
+    
+    fig,ax = plt.subplots()
+    sns.scatterplot(data=df2, x=feature_x, y=feature_y, hue=df2["Product"], ax=ax)
+    plt.legend(bbox_to_anchor=(1.05, 1), loc='upper left')
+    st.pyplot(fig)
+
+
+with c2:
+    st.subheader("Product by Frequency")
+    feature =  st.selectbox("select only quantitative data", df2.select_dtypes("object").columns)
+    fig,ax = plt.subplots()
+    ax.hist(df2[feature], bins=20)
+    ax.set_title(f'Histogram of {feature}')
+    ax.set_xlabel(feature)
+    ax.set_ylabel('Frequency')
+    st.pyplot(fig)
+
+st.markdown(""" <h10 style ="color: #0022b50"> (c) Adebola Orogun (2024) </h10>  """, unsafe_allow_html=True)
